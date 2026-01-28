@@ -7,7 +7,7 @@ const translations = {
         reviews_title: "Lo que dicen mis clientes",
         services_title: "Tratamientos",
         service_1_title: "Masaje Facial",
-        service_1_desc: "Modalidad completa (1h) o exprés (30min). Relora y revitaliza, aportando grandes beneficios visibles para tu rostro.",
+        service_1_desc: "Modalidad completa (1h) o exprés (30min). Reafirma y revitaliza, aportando grandes beneficios visibles para tu rostro.",
         service_2_title: "Técnicas Faciales",
         service_2_desc: "Tratamientos avanzados para mejorar el óvalo facial, tratar arrugas y terapia miofascial. Muy saludable.",
         service_3_title: "Limpieza Facial Profunda",

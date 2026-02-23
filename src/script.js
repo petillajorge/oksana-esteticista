@@ -40,158 +40,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let isDragging = false;
         let startX;
-        let scrollLeft;
         let currentTranslate = 0;
-        let animationId;
+        let prevTranslate = 0;
 
-        // Speed configuration (lower is slower)
+        // Speed configuration
         const baseSpeed = 0.5;
+        let currentSpeed = baseSpeed;
 
-        // Loop logic
-        function animate() {
-            if (!isDragging) {
-                currentTranslate -= baseSpeed;
+        let halfWidth = track.scrollWidth / 2;
 
-                // Infinite Loop Logic
-                // We assume the content is duplicated. When we have scrolled half (width of one set), we reset.
-                // However, simpler is to check if we've reached the end.
-                // Better approach: reset when the first set is fully out.
-                // Assuming content is duplicated 1:1.
+        const updateWidth = () => {
+            halfWidth = track.scrollWidth / 2;
+        };
 
-                const trackWidth = track.scrollWidth;
-                const halfWidth = trackWidth / 2;
-
-                // Reset when we've moved past half the width
-                if (Math.abs(currentTranslate) >= halfWidth) {
-                    currentTranslate = 0;
-                }
-
-                track.style.transform = `translateX(${currentTranslate}px)`;
-            }
-            animationId = requestAnimationFrame(animate);
+        window.addEventListener('resize', updateWidth);
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(updateWidth);
+        } else {
+            setTimeout(updateWidth, 500);
+            setTimeout(updateWidth, 1500);
         }
 
-        // Start animation
-        animationId = requestAnimationFrame(animate);
-
-        // Pause on hover
-        wrapper.addEventListener('mouseenter', () => {
-            // Optional: Pause purely on hover, or only when dragging?
-            // User asked for "fixing the pause on hover", so we pause the updating of transform
-            // But we keep the animation loop running
-            cancelAnimationFrame(animationId);
-        });
-
-        wrapper.addEventListener('mouseleave', () => {
+        function animate() {
             if (!isDragging) {
-                animationId = requestAnimationFrame(animate);
+                currentTranslate -= currentSpeed;
             }
+
+            // Seamless infinite looping boundary checks
+            if (currentTranslate <= -halfWidth) {
+                currentTranslate += halfWidth;
+                if (isDragging) prevTranslate += halfWidth;
+            } else if (currentTranslate > 0) {
+                currentTranslate -= halfWidth;
+                if (isDragging) prevTranslate -= halfWidth;
+            }
+
+            track.style.transform = `translateX(${currentTranslate}px)`;
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+
+        // Hover to pause
+        wrapper.addEventListener('mouseenter', () => currentSpeed = 0);
+        wrapper.addEventListener('mouseleave', () => {
+            currentSpeed = baseSpeed;
             isDragging = false;
             wrapper.classList.remove('cursor-grabbing');
             wrapper.classList.add('cursor-grab');
         });
 
-        // Drag Functionality
-        wrapper.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.pageX - wrapper.offsetLeft;
-            // Get current transform value
-            const style = window.getComputedStyle(track);
-            const matrix = new DOMMatrix(style.transform);
-            currentTranslate = matrix.m41;
+        const getX = (e) => (e.touches ? e.touches[0].pageX : e.pageX);
 
-            // Allow dragging (disable CSS transition if added)
+        const handleDragStart = (e) => {
+            isDragging = true;
+            startX = getX(e);
+            prevTranslate = currentTranslate;
             wrapper.classList.add('cursor-grabbing');
             wrapper.classList.remove('cursor-grab');
-            cancelAnimationFrame(animationId); // Ensure auto-move stops
-        });
+            currentSpeed = 0; // Pause auto-scrolling during drag
+        };
 
-        wrapper.addEventListener('mousemove', (e) => {
+        const handleDragMove = (e) => {
             if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - wrapper.offsetLeft;
-            const walk = (x - startX) * 1.5; // Scroll-fast
-            let nextTranslate = currentTranslate + walk;
+            // Prevent text selection and unwanted scroll during desktop drag
+            if (!e.touches) e.preventDefault();
 
-            // Boundary checks for infinite feel during Drag?
-            // Re-implement infinite wrapping for drag
-            const trackWidth = track.scrollWidth;
-            const halfWidth = trackWidth / 2;
+            const x = getX(e);
+            // Feel free to adjust drag sensitivity (1 is 1:1, 1.5 is faster)
+            const walk = (x - startX) * 1.5;
+            currentTranslate = prevTranslate + walk;
+        };
 
-            // If dragged too far left
-            if (nextTranslate <= -halfWidth) {
-                nextTranslate += halfWidth;
-                currentTranslate += halfWidth; // adjust base
-                startX = x; // adjust reference
-            }
-            // If dragged too far right (positive)
-            if (nextTranslate > 0) {
-                nextTranslate -= halfWidth;
-                currentTranslate -= halfWidth;
-                startX = x;
-            }
-
-            track.style.transform = `translateX(${nextTranslate}px)`;
-
-            // Update currentTranslate for the next auto-scroll resumption
-            // Note: we don't update currentTranslate global here fully to keep "walk" relative to startX
-            // But when mouseup happens, we need the new base.
-        });
-
-        wrapper.addEventListener('mouseup', (e) => {
+        const handleDragEnd = () => {
             isDragging = false;
             wrapper.classList.remove('cursor-grabbing');
             wrapper.classList.add('cursor-grab');
-
-            // Update the global currentTranslate to where we dropped it
-            const style = window.getComputedStyle(track);
-            const matrix = new DOMMatrix(style.transform);
-            currentTranslate = matrix.m41;
-
-            // Resume
-            animationId = requestAnimationFrame(animate);
-        });
-
-        // Touch support
-        wrapper.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            startX = e.touches[0].pageX - wrapper.offsetLeft;
-            const style = window.getComputedStyle(track);
-            const matrix = new DOMMatrix(style.transform);
-            currentTranslate = matrix.m41;
-            cancelAnimationFrame(animationId);
-        });
-
-        wrapper.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            const x = e.touches[0].pageX - wrapper.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            let nextTranslate = currentTranslate + walk;
-
-            const trackWidth = track.scrollWidth;
-            const halfWidth = trackWidth / 2;
-
-            if (nextTranslate <= -halfWidth) {
-                nextTranslate += halfWidth;
-                currentTranslate += halfWidth;
-                startX = x;
+            // Resume speed if not still hovered (mouseleave handles the baseSpeed restore normally, but just in case for touch)
+            if (!wrapper.matches(':hover')) {
+                currentSpeed = baseSpeed;
             }
-            if (nextTranslate > 0) {
-                nextTranslate -= halfWidth;
-                currentTranslate -= halfWidth;
-                startX = x;
-            }
+        };
 
-            track.style.transform = `translateX(${nextTranslate}px)`;
-        });
+        // Desktop Events
+        wrapper.addEventListener('mousedown', handleDragStart);
+        wrapper.addEventListener('mousemove', handleDragMove);
+        wrapper.addEventListener('mouseup', handleDragEnd);
 
-        wrapper.addEventListener('touchend', () => {
-            isDragging = false;
-            const style = window.getComputedStyle(track);
-            const matrix = new DOMMatrix(style.transform);
-            currentTranslate = matrix.m41;
-            animationId = requestAnimationFrame(animate);
-        });
+        // Touch Events
+        wrapper.addEventListener('touchstart', handleDragStart, { passive: true });
+        wrapper.addEventListener('touchmove', handleDragMove, { passive: true });
+        wrapper.addEventListener('touchend', handleDragEnd);
     }
 
     // Initialize

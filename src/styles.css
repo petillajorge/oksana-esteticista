@@ -40,3 +40,6 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Touch utility for mobile avoiding vertical page scroll when sliding carousel */
+#marquee-track { touch-action: pan-y pinch-zoom; }

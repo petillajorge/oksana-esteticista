@@ -61,18 +61,48 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(updateWidth, 1500);
         }
 
+        let isSnapping = false;
+        let targetTranslate = 0;
+        const itemWidth = 352; // 320px item + 32px gap
+
+        const snapTo = (walk) => {
+            isSnapping = true;
+            // Snap to nearest or next item based on direction
+            if (walk > 50) { // Dragged right -> Previous item
+                targetTranslate = Math.ceil(currentTranslate / itemWidth) * itemWidth;
+            } else if (walk < -50) { // Dragged left -> Next item
+                targetTranslate = Math.floor(currentTranslate / itemWidth) * itemWidth;
+            } else { // Snap back to nearest
+                targetTranslate = Math.round(currentTranslate / itemWidth) * itemWidth;
+            }
+            currentSpeed = 0; // Pause auto scroll while snapping and viewing
+        };
+
         function animate() {
             if (!isDragging) {
-                currentTranslate -= currentSpeed;
+                if (isSnapping) {
+                    currentTranslate += (targetTranslate - currentTranslate) * 0.1;
+                    if (Math.abs(targetTranslate - currentTranslate) < 1) {
+                        currentTranslate = targetTranslate;
+                        isSnapping = false;
+                        if (!wrapper.matches(':hover')) {
+                            currentSpeed = baseSpeed;
+                        }
+                    }
+                } else {
+                    currentTranslate -= currentSpeed;
+                }
             }
 
             // Seamless infinite looping boundary checks
             if (currentTranslate <= -halfWidth) {
                 currentTranslate += halfWidth;
                 if (isDragging) prevTranslate += halfWidth;
+                if (isSnapping) targetTranslate += halfWidth;
             } else if (currentTranslate > 0) {
                 currentTranslate -= halfWidth;
                 if (isDragging) prevTranslate -= halfWidth;
+                if (isSnapping) targetTranslate -= halfWidth;
             }
 
             track.style.transform = `translateX(${currentTranslate}px)`;
@@ -138,12 +168,20 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const handleDragEnd = () => {
+            if (!isDragging) return;
             isDragging = false;
             wrapper.classList.remove('cursor-grabbing');
             wrapper.classList.add('cursor-grab');
-            // Resume speed if not still hovered (mouseleave handles the baseSpeed restore normally, but just in case for touch)
-            if (!wrapper.matches(':hover')) {
-                currentSpeed = baseSpeed;
+
+            if (isDragValid) {
+                const walk = currentTranslate - prevTranslate;
+                snapTo(walk);
+                // We keep dragValid true for a tiny bit so clicks aren't immediately fired when releasing mouse/finger
+                setTimeout(() => isDragValid = false, 50);
+            } else {
+                if (!wrapper.matches(':hover')) {
+                    currentSpeed = baseSpeed;
+                }
             }
         };
 
@@ -156,6 +194,21 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapper.addEventListener('touchstart', handleDragStart, { passive: true });
         wrapper.addEventListener('touchmove', handleDragMove, { passive: false });
         wrapper.addEventListener('touchend', handleDragEnd);
+
+        // Click on sides to jump to nearest review
+        wrapper.addEventListener('click', (e) => {
+            if (isDragValid) return; // Prevent triggering click right after dragging
+
+            const rect = wrapper.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+
+            // If they click on the left/right 25% of the carousel...
+            if (clickX < rect.width * 0.25) {
+                snapTo(100); // Forces snapping to prev item (rightwards movement)
+            } else if (clickX > rect.width * 0.75) {
+                snapTo(-100); // Forces snapping to next item (leftwards movement)
+            }
+        });
     }
 
     // Services Card Click-to-Collapse Logic (Mobile/Desktop Hybrid)

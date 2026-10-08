@@ -1,6 +1,6 @@
-# Oksana Pershyna — Haute Cosmetology & Aesthetic Sanctuary
+# Oksana Pershyna — Cosmetology & Aesthetic Sanctuary
 
-A high-end, responsive web application for **Oksana Pershyna**, certified aesthetic cosmetologist. This repository showcases personalized skin care, advanced facial techniques, body wellness rituals, and direct client booking.
+A high-end, responsive web application for **Oksana**, certified aesthetic cosmetologist. This repository showcases personalized skin care, advanced facial techniques, body wellness rituals, and direct client booking.
 
 ---
 
@@ -97,5 +97,5 @@ npm run dev
 
 ## ✒️ License & Author
 
-Developed with care for **Oksana Pershyna — Cosmetóloga Esteticista**.
+Developed with care for **Oksana — Cosmetóloga Esteticista**.
 All rights reserved © 2026.

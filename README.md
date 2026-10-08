@@ -1,4 +1,4 @@
-# Oksana Pershyna — Cosmetology & Aesthetic Sanctuary
+# Oksana — Cosmetology & Aesthetic Sanctuary
 
 A high-end, responsive web application for **Oksana**, certified aesthetic cosmetologist. This repository showcases personalized skin care, advanced facial techniques, body wellness rituals, and direct client booking.
 

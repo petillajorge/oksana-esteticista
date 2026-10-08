@@ -1,20 +1,38 @@
 import translations from './locales.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Language switcher
     const langSwitcher = document.getElementById('lang-switcher-v2');
+    let currentLang = 'es';
+    let currentActiveServiceKey = null;
 
     function setLanguage(lang) {
-        const t = translations[lang] || translations['es'];
+        currentLang = translations[lang] ? lang : 'es';
+        const t = translations[currentLang];
+
+        // 1. Translate elements with data-i18n
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (t[key]) {
                 el.textContent = t[key];
             }
         });
-        document.documentElement.lang = lang;
-        localStorage.setItem('preferredLang', lang);
-        if (langSwitcher) langSwitcher.value = lang;
+
+        // 2. Translate placeholders with data-i18n-ph
+        document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+            const key = el.getAttribute('data-i18n-ph');
+            if (t[key]) {
+                el.setAttribute('placeholder', t[key]);
+            }
+        });
+
+        document.documentElement.lang = currentLang;
+        localStorage.setItem('preferredLang', currentLang);
+        if (langSwitcher) langSwitcher.value = currentLang;
+
+        // 3. Update modal content if it is currently open
+        if (currentActiveServiceKey) {
+            updateModalText(currentActiveServiceKey);
+        }
     }
 
     const savedLang = localStorage.getItem('preferredLang');
@@ -39,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Filterable Treatments Modal / Interactive Selection
+    // Filterable Treatments
     const filterButtons = document.querySelectorAll('.treatment-filter-btn');
     const treatmentCards = document.querySelectorAll('.treatment-card');
 
@@ -66,22 +84,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Treatment Detail Modal Logic
+    // Treatment Detail Modal Logic
     const modal = document.getElementById('treatment-modal');
     const modalTitle = document.getElementById('modal-title');
     const modalDesc = document.getElementById('modal-desc');
     const closeModalBtn = document.getElementById('close-modal');
 
+    function updateModalText(serviceKey) {
+        const t = translations[currentLang] || translations['es'];
+        if (modalTitle) modalTitle.textContent = t[`${serviceKey}_modal_title`] || t[`${serviceKey}_title`] || '';
+        if (modalDesc) modalDesc.textContent = t[`${serviceKey}_modal_desc`] || t[`${serviceKey}_desc`] || '';
+    }
+
     document.querySelectorAll('.open-treatment-modal').forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
-            const title = button.getAttribute('data-title');
-            const desc = button.getAttribute('data-desc');
+            const serviceKey = button.getAttribute('data-service');
+            currentActiveServiceKey = serviceKey;
 
-            if (modalTitle && modalDesc) {
-                modalTitle.textContent = title;
-                modalDesc.textContent = desc;
-            }
+            updateModalText(serviceKey);
 
             if (modal) {
                 modal.classList.remove('hidden');
@@ -94,17 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModalBtn.addEventListener('click', () => {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
+            currentActiveServiceKey = null;
         });
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
+                currentActiveServiceKey = null;
             }
         });
     }
 
-    // 4. Quick Consultation Form Simulator
+    // Quick Consultation Form
     const consultForm = document.getElementById('quick-consult-form');
     const consultSuccess = document.getElementById('consult-success');
 
@@ -121,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Infinite Smooth Testimonial Carousel
+    // Infinite Smooth Testimonial Carousel
     const marqueeTrack = document.getElementById('marquee-track-v2');
     if (marqueeTrack) {
         let translate = 0;

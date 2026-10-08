@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oksana Pershyna — High-End Cosmetology</title>
-    <meta name="description" content="Elevate your radiance. Premier aesthetic & holistic cosmetology treatments by Oksana Pershyna. Natural beauty, bespoke care, timeless elegance.">
+    <title>Oksana Pershyna — High-End Cosmetology & Aesthetic Sanctuary</title>
+    <meta name="description" content="Belleza atemporal, cuidado experto. Servicios de cosmetología por Oksana Pershyna. Вечная красота, профессиональный уход. Косметологические услуги от Оксаны Першиной.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Prata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Prata&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS (CDN for rapid styling & v2 luxury dynamic theme) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,6 +28,7 @@
                         charcoal: '#1A1817',
                         emerald: '#2D4030',
                         ochre: '#f0bf8d',
+                        'ochre-dark': '#e0af7d',
                         'ochre-deep': '#8c5a2b',
                     },
                     fontFamily: {
@@ -35,6 +36,7 @@
                         jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
                         soledago: ['Prata', 'serif'],
                         serif: ['"Playfair Display"', 'serif'],
+                        raleway: ['Raleway', 'sans-serif'],
                     },
                     keyframes: {
                         fadeIn: {
@@ -44,11 +46,18 @@
                         floatSlow: {
                             '0%, 100%': { transform: 'translateY(0px)' },
                             '50%': { transform: 'translateY(-12px)' }
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         }
                     },
                     animation: {
                         fadeIn: 'fadeIn 0.8s ease-out forwards',
-                        floatSlow: 'floatSlow 6s ease-in-out infinite'
+                        floatSlow: 'floatSlow 6s ease-in-out infinite',
+                        blob: 'blob 7s infinite',
                     }
                 }
             }
@@ -65,37 +74,34 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .bg-soft-gradient {
-            background: radial-gradient(circle at 50% 0%, rgba(247,242,234,0.8) 0%, rgba(253,251,247,1) 100%);
-        }
     </style>
 </head>
 <body class="bg-cream font-jakarta text-charcoal antialiased selection:bg-champagne selection:text-charcoal scroll-smooth">
 
     <!-- Top Announcement Bar -->
     <div class="bg-charcoal text-champagne text-xs py-2 px-4 text-center tracking-widest uppercase font-light border-b border-gold/20 flex items-center justify-center gap-3">
-        <span>✨ Bespoke Aesthetic Journeys & Personalized Glow Consultations</span>
+        <span data-i18n="announcement">✨ Bespoke Aesthetic Journeys & Personalized Glow Consultations</span>
         <span class="hidden md:inline text-gold">•</span>
-        <a href="#quick-booking" class="underline hover:text-white transition-colors hidden md:inline">Reserve Your Session</a>
+        <a href="#quick-booking" data-i18n="announcement_reserve" class="underline hover:text-white transition-colors hidden md:inline">Reserve Your Session</a>
     </div>
 
     <!-- Navigation Header -->
     <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-glass border-b border-linen/60 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 h-22 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex flex-col group">
-                <span class="font-cormorant text-2xl md:text-3xl tracking-wider text-charcoal group-hover:text-bronze transition-colors">OKSANA PERSHYNA</span>
-                <span class="text-[9px] uppercase tracking-[0.3em] text-bronze/80 font-medium -mt-1">Haute Cosmetology</span>
+                <span data-i18n="hero_headline_name" class="font-cormorant text-2xl md:text-3xl tracking-wider text-charcoal group-hover:text-bronze transition-colors">Oksana Pershyna</span>
+                <span data-i18n="hero_headline_subtext" class="text-[9px] uppercase tracking-[0.3em] text-bronze/80 font-medium -mt-1">Cosmetóloga Esteticista</span>
             </a>
 
             <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-charcoal/80">
-                <a href="#about" class="hover:text-bronze transition-colors">Philosophy</a>
-                <a href="#treatments" class="hover:text-bronze transition-colors">Treatments Menu</a>
-                <a href="#reviews" class="hover:text-bronze transition-colors">Client Reviews</a>
-                <a href="#consultation" class="hover:text-bronze transition-colors">Skin Quiz</a>
+            <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-[0.2em] font-medium text-charcoal/80">
+                <a href="#about" data-i18n="nav_philosophy" class="hover:text-bronze transition-colors">Filosofía</a>
+                <a href="#treatments" data-i18n="nav_treatments" class="hover:text-bronze transition-colors">Tratamientos</a>
+                <a href="#reviews" data-i18n="nav_reviews" class="hover:text-bronze transition-colors">Opiniones</a>
+                <a href="#consultation" data-i18n="nav_quiz" class="hover:text-bronze transition-colors">Diagnóstico</a>
             </nav>
 
-            <div class="flex items-center space-x-5">
+            <div class="flex items-center space-x-4">
                 <select id="lang-switcher-v2" class="bg-transparent text-xs font-semibold uppercase tracking-wider text-charcoal cursor-pointer border border-linen rounded-full px-3 py-1.5 focus:outline-none focus:border-bronze hover:bg-sand transition-colors">
                     <option value="es">ES</option>
                     <option value="en">EN</option>
@@ -103,80 +109,99 @@
                     <option value="ua">UA</option>
                 </select>
 
-                <a href="#quick-booking" class="hidden sm:inline-flex bg-charcoal text-champagne text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:bg-bronze transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                    Book Experience
+                <a href="https://instagram.com/oksana_esteticista" target="_blank" data-i18n="nav_book_btn" class="hidden sm:inline-flex bg-charcoal text-champagne text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:bg-bronze transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    Reservar Cita
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-soft-gradient py-16">
-        <!-- Background Ambient Circles -->
-        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-champagne/20 rounded-full blur-3xl pointer-events-none animate-floatSlow"></div>
-        <div class="absolute bottom-0 right-10 w-96 h-96 bg-linen/50 rounded-full blur-2xl pointer-events-none"></div>
+    <!-- Hero Section (With Blurred Background Video like original index.html) -->
+    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-16">
+        <!-- Background Video (Original index.html style) -->
+        <div class="absolute inset-0 -z-10 overflow-hidden">
+            <video
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="./assets/background-thumbnail.png"
+                class="absolute min-w-full min-h-full object-cover scale-105 blur-md opacity-35">
+                <source src="./assets/background.webm" type="video/webm">
+            </video>
+            <div class="absolute inset-0 bg-cream/70 backdrop-blur-[2px]"></div>
+        </div>
+
+        <!-- Decorative Ambient Blobs -->
+        <div class="absolute top-1/4 left-10 w-96 h-96 bg-ochre/20 rounded-full blur-3xl filter mix-blend-multiply animate-blob pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-champagne/30 rounded-full blur-3xl filter mix-blend-multiply animate-blob pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             <!-- Left Narrative -->
-            <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sand border border-linen text-xs uppercase tracking-[0.2em] text-bronze font-medium">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sand/90 border border-linen text-xs uppercase tracking-[0.2em] text-bronze font-medium">
                     <span class="w-2 h-2 rounded-full bg-bronze animate-pulse"></span>
-                    Individual Aesthetic Care & Natural Rejuvenation
+                    <span data-i18n="hero_badge">Cuidado Estético Individual & Rejuvenecimiento Natural</span>
                 </div>
 
-                <h1 class="font-cormorant text-5xl sm:text-6xl md:text-7xl font-normal leading-[1.08] text-charcoal">
-                    Reveal Your <span class="italic font-serif luxury-gradient-text">Timeless Radiance</span> & INNER HARMONY
+                <h1 class="font-soledago text-6xl md:text-8xl text-ochre-deep leading-tight">
+                    Oksana Pershyna
                 </h1>
 
-                <p class="text-charcoal/70 text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-                    Combining advanced myofascial massage, cellular oxygenation, and tailored skin therapies. Unveil rejuvenated, glowing skin guided by certified expertise.
+                <h2 data-i18n="hero_headline_main" class="font-cormorant text-3xl sm:text-4xl text-charcoal font-light italic">
+                    Revela tu Resplandor Atemporal y Armonía Interior
+                </h2>
+
+                <p data-i18n="hero_description" class="text-charcoal/80 text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    Combinando masaje miofascial avanzado, oxigenación celular y terapias faciales personalizadas. Revela una piel joven y radiante con respaldo profesional.
                 </p>
 
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                    <a href="#treatments" class="w-full sm:w-auto bg-charcoal text-cream text-xs uppercase tracking-[0.2em] font-medium px-8 py-4 rounded-full hover:bg-bronze transition-all duration-300 shadow-lg text-center">
-                        Explore Treatments
+                    <a href="https://instagram.com/oksana_esteticista" target="_blank" data-i18n="hero_cta"
+                       class="w-full sm:w-auto bg-ochre text-white text-xs uppercase tracking-[0.2em] font-semibold px-8 py-4 rounded-full hover:bg-ochre-deep transition-all duration-300 shadow-lg text-center transform hover:scale-105">
+                        MESSAGE ME
                     </a>
-                    <a href="#quick-booking" class="w-full sm:w-auto border border-charcoal/30 text-charcoal text-xs uppercase tracking-[0.2em] font-medium px-8 py-4 rounded-full hover:bg-sand transition-all duration-300 text-center">
-                        Personal Consultation
+                    <a href="#treatments" data-i18n="hero_btn_explore" class="w-full sm:w-auto border border-charcoal/30 text-charcoal text-xs uppercase tracking-[0.2em] font-medium px-8 py-4 rounded-full hover:bg-sand transition-all duration-300 text-center">
+                        Explorar Tratamientos
                     </a>
                 </div>
 
-                <!-- Trust Badges -->
+                <!-- Stat Badges -->
                 <div class="pt-8 border-t border-linen/80 grid grid-cols-3 gap-4 text-center lg:text-left max-w-md mx-auto lg:mx-0">
                     <div>
                         <span class="block font-cormorant text-2xl font-semibold text-charcoal">100%</span>
-                        <span class="text-[11px] uppercase tracking-wider text-charcoal/60">Tailored Care</span>
+                        <span data-i18n="stat_tailored" class="text-[11px] uppercase tracking-wider text-charcoal/60">Personalizado</span>
                     </div>
                     <div>
                         <span class="block font-cormorant text-2xl font-semibold text-charcoal">5★</span>
-                        <span class="text-[11px] uppercase tracking-wider text-charcoal/60">Client Ratings</span>
+                        <span data-i18n="stat_rating" class="text-[11px] uppercase tracking-wider text-charcoal/60">Valoración</span>
                     </div>
                     <div>
                         <span class="block font-cormorant text-2xl font-semibold text-charcoal">Certified</span>
-                        <span class="text-[11px] uppercase tracking-wider text-charcoal/60">Cosmetologist</span>
+                        <span data-i18n="stat_certified" class="text-[11px] uppercase tracking-wider text-charcoal/60">Cosmetóloga Titulada</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Visual Collage -->
+            <!-- Right Visual Portrait -->
             <div class="lg:col-span-5 relative">
                 <div class="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/80 group">
-                    <img src="./assets/oksana.jpg" alt="Oksana Pershyna Aesthetician" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                    <img src="./assets/oksana.jpg" alt="Oksana Pershyna" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent"></div>
 
                     <div class="absolute bottom-6 left-6 right-6 text-cream space-y-1">
-                        <span class="text-xs uppercase tracking-widest text-champagne">Oksana Pershyna</span>
-                        <h3 class="font-cormorant text-2xl italic">Mastering the Art of Facial Architecture & Skin Longevity</h3>
+                        <span data-i18n="hero_headline_name" class="text-xs uppercase tracking-widest text-champagne">Oksana Pershyna</span>
+                        <h3 data-i18n="hero_card_title" class="font-cormorant text-2xl italic">Lifting Natural y Relajación</h3>
                     </div>
                 </div>
 
                 <!-- Floating Accent Card -->
-                <div class="absolute -bottom-6 -left-6 bg-white/90 backdrop-blur-glass p-5 rounded-2xl border border-linen shadow-xl max-w-xs hidden sm:block">
+                <div class="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-glass p-5 rounded-2xl border border-linen shadow-xl max-w-xs hidden sm:block">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-champagne/40 flex items-center justify-center text-bronze text-lg">🌸</div>
+                        <div class="w-10 h-10 rounded-full bg-ochre/20 flex items-center justify-center text-ochre-deep text-lg">🌸</div>
                         <div>
-                            <p class="text-xs font-semibold text-charcoal">Natural Lifting & Relaxation</p>
-                            <p class="text-[10px] text-charcoal/60">No harsh invasive procedures needed</p>
+                            <p data-i18n="hero_card_title" class="text-xs font-semibold text-charcoal">Lifting Natural y Relajación</p>
+                            <p data-i18n="hero_card_sub" class="text-[10px] text-charcoal/60">Sin necesidad de tratamientos invasivos</p>
                         </div>
                     </div>
                 </div>
@@ -188,8 +213,8 @@
     <section id="about" class="py-24 bg-white border-y border-linen/50">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span class="text-xs uppercase tracking-[0.25em] text-bronze font-semibold">Our Philosophy</span>
-                <h2 class="font-cormorant text-4xl sm:text-5xl text-charcoal font-normal">Holistic Care Meets Modern Science</h2>
+                <span data-i18n="about_tag" class="text-xs uppercase tracking-[0.25em] text-bronze font-semibold">Nuestra Filosofía</span>
+                <h2 data-i18n="about_title" class="font-cormorant text-4xl sm:text-5xl text-charcoal font-normal">Cuidado Holístico y Ciencia Moderna</h2>
                 <div class="w-12 h-0.5 bg-bronze mx-auto mt-2"></div>
             </div>
 
@@ -197,27 +222,27 @@
                 <!-- Advantage 1 -->
                 <div class="p-8 rounded-3xl bg-cream border border-linen hover:border-bronze/40 transition-all duration-300 hover:shadow-xl space-y-4">
                     <div class="w-12 h-12 rounded-2xl bg-sand flex items-center justify-center text-bronze font-cormorant text-xl font-bold">01</div>
-                    <h3 class="font-cormorant text-2xl text-charcoal">Non-Invasive Architecture</h3>
-                    <p class="text-sm text-charcoal/70 leading-relaxed font-light">
-                        Specialized manual techniques and myofascial release designed to sculpted facial contours, restore tone, and reduce tension naturally.
+                    <h3 data-i18n="about_card1_title" class="font-cormorant text-2xl text-charcoal">Arquitectura Facial No Invasiva</h3>
+                    <p data-i18n="about_card1_desc" class="text-sm text-charcoal/70 leading-relaxed font-light">
+                        Técnicas manuales especializadas y liberación miofascial diseñadas para esculpir los contornos faciales y restaurar el tono de forma natural.
                     </p>
                 </div>
 
                 <!-- Advantage 2 -->
                 <div class="p-8 rounded-3xl bg-cream border border-linen hover:border-bronze/40 transition-all duration-300 hover:shadow-xl space-y-4">
                     <div class="w-12 h-12 rounded-2xl bg-sand flex items-center justify-center text-bronze font-cormorant text-xl font-bold">02</div>
-                    <h3 class="font-cormorant text-2xl text-charcoal">Cellular Revitalization</h3>
-                    <p class="text-sm text-charcoal/70 leading-relaxed font-light">
-                        Advanced treatments like Carboxytherapy and Peptide formulations targeting deep tissue oxygenation, collagen stimulation, and lasting luminosity.
+                    <h3 data-i18n="about_card2_title" class="font-cormorant text-2xl text-charcoal">Revitalización Celular</h3>
+                    <p data-i18n="about_card2_desc" class="text-sm text-charcoal/70 leading-relaxed font-light">
+                        Tratamientos avanzados como Carboxiterapia y Fórmulas Peptídicas para una oxigenación profunda y luminosidad duradera.
                     </p>
                 </div>
 
                 <!-- Advantage 3 -->
                 <div class="p-8 rounded-3xl bg-cream border border-linen hover:border-bronze/40 transition-all duration-300 hover:shadow-xl space-y-4">
                     <div class="w-12 h-12 rounded-2xl bg-sand flex items-center justify-center text-bronze font-cormorant text-xl font-bold">03</div>
-                    <h3 class="font-cormorant text-2xl text-charcoal">Sensory Atmosphere</h3>
-                    <p class="text-sm text-charcoal/70 leading-relaxed font-light">
-                        Every session is an immersive wellness ritual created to quiet the mind, release stress, and leave you entirely renewed.
+                    <h3 data-i18n="about_card3_title" class="font-cormorant text-2xl text-charcoal">Atmósfera Sensorial</h3>
+                    <p data-i18n="about_card3_desc" class="text-sm text-charcoal/70 leading-relaxed font-light">
+                        Cada sesión es un ritual de bienestar creado para calmar la mente, liberar el estrés y renovarte por completo.
                     </p>
                 </div>
             </div>
@@ -229,45 +254,44 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                 <div>
-                    <span class="text-xs uppercase tracking-[0.25em] text-bronze font-semibold">Selected Menu</span>
-                    <h2 data-i18n="services_title" class="font-cormorant text-4xl sm:text-5xl text-charcoal font-normal mt-1">Curated Treatments</h2>
+                    <span data-i18n="services_tag" class="text-xs uppercase tracking-[0.25em] text-bronze font-semibold">Menú Seleccionado</span>
+                    <h2 data-i18n="services_title" class="font-cormorant text-4xl sm:text-5xl text-charcoal font-normal mt-1">Tratamientos</h2>
                 </div>
 
                 <!-- Category Filters -->
                 <div class="flex flex-wrap gap-2 text-xs uppercase tracking-wider font-medium">
-                    <button class="treatment-filter-btn px-5 py-2.5 rounded-full bg-amber-900 text-white transition-all shadow-sm" data-filter="all">All Treatments</button>
-                    <button class="treatment-filter-btn px-5 py-2.5 rounded-full bg-stone-100 text-stone-700 hover:bg-linen transition-all" data-filter="facial">Facials & Massage</button>
-                    <button class="treatment-filter-btn px-5 py-2.5 rounded-full bg-stone-100 text-stone-700 hover:bg-linen transition-all" data-filter="advanced">Advanced Therapy</button>
-                    <button class="treatment-filter-btn px-5 py-2.5 rounded-full bg-stone-100 text-stone-700 hover:bg-linen transition-all" data-filter="body">Body & Podal</button>
+                    <button class="treatment-filter-btn px-5 py-2.5 rounded-full bg-amber-900 text-white transition-all shadow-sm" data-filter="all" data-i18n="filter_all">Todos</button>
+                    <button class="treatment-filter-btn px-5 py-2.5 rounded-full bg-stone-100 text-stone-700 hover:bg-linen transition-all" data-filter="facial" data-i18n="filter_facials">Faciales y Masaje</button>
+                    <button class="treatment-filter-btn px-5 py-2.5 rounded-full bg-stone-100 text-stone-700 hover:bg-linen transition-all" data-filter="advanced" data-i18n="filter_advanced">Terapia Avanzada</button>
+                    <button class="treatment-filter-btn px-5 py-2.5 rounded-full bg-stone-100 text-stone-700 hover:bg-linen transition-all" data-filter="body" data-i18n="filter_body">Cuerpo y Podal</button>
                 </div>
             </div>
 
             <!-- Treatment Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
+                <!-- Service 1: Masaje Facial -->
                 <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="facial">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">60 Min / 30 Min</span>
+                            <span data-i18n="service_1_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">60 Min / 30 Min</span>
                             <span class="text-xs text-charcoal/40 font-mono">01</span>
                         </div>
                         <h3 data-i18n="service_1_title" class="font-cormorant text-2xl text-charcoal mb-3">Masaje Facial</h3>
                         <p data-i18n="service_1_desc" class="text-sm text-charcoal/70 font-light leading-relaxed mb-6">
-                            Modalidad completa o exprés. Reafirma y revitaliza, aportando grandes beneficios visibles para tu rostro.
+                            Modalidad completa (1h) o exprés (30min). Reafirma y revitaliza, aportando grandes beneficios visibles para tu rostro.
                         </p>
                     </div>
                     <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
-                            data-title="Masaje Facial Completo & Express"
-                            data-desc="Este tratamiento combina manipulaciones profundas y estimulación circulatoria para tonificar la musculatura facial, drenar toxinas y devolver el resplandor natural a la piel.">
-                        Discover Ritual &rarr;
+                            data-service="service_1" data-i18n="btn_discover">
+                        Descubrir Ritual →
                     </button>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- Service 2: Técnicas Faciales -->
                 <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="facial">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Contour & Lifting</span>
+                            <span data-i18n="service_2_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Contorno y Lifting</span>
                             <span class="text-xs text-charcoal/40 font-mono">02</span>
                         </div>
                         <h3 data-i18n="service_2_title" class="font-cormorant text-2xl text-charcoal mb-3">Técnicas Faciales Avanzadas</h3>
@@ -276,17 +300,16 @@
                         </p>
                     </div>
                     <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
-                            data-title="Técnicas Faciales Miofasciales"
-                            data-desc="Técnica especializada enfocada en liberar adherencias en el tejido conectivo facial. Esculpe la mandíbula, suaviza líneas de expresión y mejora la simetría.">
-                        Discover Ritual &rarr;
+                            data-service="service_2" data-i18n="btn_discover">
+                        Descubrir Ritual →
                     </button>
                 </div>
 
-                <!-- Card 3 -->
+                <!-- Service 3: Limpieza Facial -->
                 <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="facial">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Deep Cleansing</span>
+                            <span data-i18n="service_3_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Limpieza Profunda</span>
                             <span class="text-xs text-charcoal/40 font-mono">03</span>
                         </div>
                         <h3 data-i18n="service_3_title" class="font-cormorant text-2xl text-charcoal mb-3">Limpieza Facial Profunda</h3>
@@ -295,55 +318,52 @@
                         </p>
                     </div>
                     <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
-                            data-title="Limpieza Facial en Dos Etapas"
-                            data-desc="Protocolo higiénico y calmante diseñado para eliminar impurezas sin causar irritación. Finaliza con mascarilla regeneradora personalizada.">
-                        Discover Ritual &rarr;
+                            data-service="service_3" data-i18n="btn_discover">
+                        Descubrir Ritual →
                     </button>
                 </div>
 
-                <!-- Card 4 -->
-                <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="advanced">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Oxygenation</span>
-                            <span class="text-xs text-charcoal/40 font-mono">04</span>
-                        </div>
-                        <h3 data-i18n="service_7_title" class="font-cormorant text-2xl text-charcoal mb-3">Carboxiterapia</h3>
-                        <p data-i18n="service_7_desc" class="text-sm text-charcoal/70 font-light leading-relaxed mb-6">
-                            Oxigenación celular para revitalizar la piel, mejorar la elasticidad y circulación.
-                        </p>
-                    </div>
-                    <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
-                            data-title="Carboxiterapia Estética"
-                            data-desc="Terapia de infusión de dióxido de carbono que estimula la microcirculación y la producción de colágeno natural, aportando firmeza y tono uniforme.">
-                        Discover Ritual &rarr;
-                    </button>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="advanced">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Biomedical Skin</span>
-                            <span class="text-xs text-charcoal/40 font-mono">05</span>
-                        </div>
-                        <h3 data-i18n="service_8_title" class="font-cormorant text-2xl text-charcoal mb-3">Peptidoterapia</h3>
-                        <p data-i18n="service_8_desc" class="text-sm text-charcoal/70 font-light leading-relaxed mb-6">
-                            Nutrición avanzada con péptidos para estimular la regeneración y firmeza de la piel.
-                        </p>
-                    </div>
-                    <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
-                            data-title="Peptidoterapia Nutritiva"
-                            data-desc="Péptidos de alta biodisponibilidad formulados para acelerar la regeneración celular y mitigar signos prematuros de envejecimiento.">
-                        Discover Ritual &rarr;
-                    </button>
-                </div>
-
-                <!-- Card 6 -->
+                <!-- Service 4: Masaje Corporal -->
                 <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="body">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Reflexology & Energy</span>
+                            <span data-i18n="service_4_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Cuerpo Completo</span>
+                            <span class="text-xs text-charcoal/40 font-mono">04</span>
+                        </div>
+                        <h3 data-i18n="service_4_title" class="font-cormorant text-2xl text-charcoal mb-3">Masaje Corporal Clásico</h3>
+                        <p data-i18n="service_4_desc" class="text-sm text-charcoal/70 font-light leading-relaxed mb-6">
+                            Sesión de una hora para liberar tensiones, mejorar la circulación y relajar todo el cuerpo.
+                        </p>
+                    </div>
+                    <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
+                            data-service="service_4" data-i18n="btn_discover">
+                        Descubrir Ritual →
+                    </button>
+                </div>
+
+                <!-- Service 5: Masaje de Manos -->
+                <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="body">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span data-i18n="service_5_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Cuidado Delicado</span>
+                            <span class="text-xs text-charcoal/40 font-mono">05</span>
+                        </div>
+                        <h3 data-i18n="service_5_title" class="font-cormorant text-2xl text-charcoal mb-3">Masaje de Manos</h3>
+                        <p data-i18n="service_5_desc" class="text-sm text-charcoal/70 font-light leading-relaxed mb-6">
+                            Cuidado dedicado para tus manos, aliviando tensión y dejándolas suaves y renovadas.
+                        </p>
+                    </div>
+                    <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
+                            data-service="service_5" data-i18n="btn_discover">
+                        Descubrir Ritual →
+                    </button>
+                </div>
+
+                <!-- Service 6: Masaje Podal -->
+                <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="body">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span data-i18n="service_6_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Reflexología y Energía</span>
                             <span class="text-xs text-charcoal/40 font-mono">06</span>
                         </div>
                         <h3 data-i18n="service_6_title" class="font-cormorant text-2xl text-charcoal mb-3">Masaje Podal Zoku Shin Do</h3>
@@ -352,9 +372,62 @@
                         </p>
                     </div>
                     <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
-                            data-title="Masaje Podal Zoku Shin Do"
-                            data-desc="Antigua técnica japonesa de masaje podal que actúa sobre los puntos reflejos para restaurar el flujo energético y brindar un descanso absoluto.">
-                        Discover Ritual &rarr;
+                            data-service="service_6" data-i18n="btn_discover">
+                        Descubrir Ritual →
+                    </button>
+                </div>
+
+                <!-- Service 7: Carboxiterapia -->
+                <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="advanced">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span data-i18n="service_7_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Oxigenación</span>
+                            <span class="text-xs text-charcoal/40 font-mono">07</span>
+                        </div>
+                        <h3 data-i18n="service_7_title" class="font-cormorant text-2xl text-charcoal mb-3">Carboxiterapia</h3>
+                        <p data-i18n="service_7_desc" class="text-sm text-charcoal/70 font-light leading-relaxed mb-6">
+                            Oxigenación celular para revitalizar la piel, mejorar la elasticidad y circulación.
+                        </p>
+                    </div>
+                    <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
+                            data-service="service_7" data-i18n="btn_discover">
+                        Descubrir Ritual →
+                    </button>
+                </div>
+
+                <!-- Service 8: Peptidoterapia -->
+                <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="advanced">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span data-i18n="service_8_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Cosmética Biomédica</span>
+                            <span class="text-xs text-charcoal/40 font-mono">08</span>
+                        </div>
+                        <h3 data-i18n="service_8_title" class="font-cormorant text-2xl text-charcoal mb-3">Peptidoterapia</h3>
+                        <p data-i18n="service_8_desc" class="text-sm text-charcoal/70 font-light leading-relaxed mb-6">
+                            Nutrición avanzada con péptidos para estimular la regeneración y firmeza de la piel.
+                        </p>
+                    </div>
+                    <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
+                            data-service="service_8" data-i18n="btn_discover">
+                        Descubrir Ritual →
+                    </button>
+                </div>
+
+                <!-- Service 9: Peeling -->
+                <div class="treatment-card flex flex-col justify-between p-8 rounded-3xl bg-white border border-linen hover:border-bronze transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-xl" data-category="advanced">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span data-i18n="service_9_badge" class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full bg-sand text-bronze">Renovación Celular</span>
+                            <span class="text-xs text-charcoal/40 font-mono">09</span>
+                        </div>
+                        <h3 data-i18n="service_9_title" class="font-cormorant text-2xl text-charcoal mb-3">Peeling Químico</h3>
+                        <p data-i18n="service_9_desc" class="text-sm text-charcoal/70 font-light leading-relaxed mb-6">
+                            Renovación celular para una piel más luminosa, uniforme y suave al tacto.
+                        </p>
+                    </div>
+                    <button class="open-treatment-modal text-xs uppercase tracking-widest font-semibold text-bronze hover:text-charcoal inline-flex items-center gap-2 pt-4 border-t border-linen transition-colors"
+                            data-service="service_9" data-i18n="btn_discover">
+                        Descubrir Ritual →
                     </button>
                 </div>
             </div>
@@ -366,39 +439,39 @@
         <div class="max-w-5xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-5 space-y-6">
-                    <span class="text-xs uppercase tracking-[0.25em] text-gold font-semibold">Personalized Skin Guide</span>
-                    <h2 class="font-cormorant text-4xl sm:text-5xl font-normal leading-tight">Find Your Ideal Treatment Ritual</h2>
-                    <p class="text-cream/70 text-sm leading-relaxed font-light">
-                        Unsure which skin treatment matches your current skin goals? Answer two quick options to receive tailored recommendations.
+                    <span data-i18n="quiz_tag" class="text-xs uppercase tracking-[0.25em] text-gold font-semibold">Guía Facial Personalizada</span>
+                    <h2 data-i18n="quiz_title" class="font-cormorant text-4xl sm:text-5xl font-normal leading-tight">Encuentra tu Tratamiento Ideal</h2>
+                    <p data-i18n="quiz_desc" class="text-cream/70 text-sm leading-relaxed font-light">
+                        ¿No sabes qué tratamiento se adapta mejor a tu piel? Responde a estas preguntas para recibir una recomendación personalizada.
                     </p>
                 </div>
 
                 <div class="lg:col-span-7 bg-white/5 border border-white/10 p-8 sm:p-10 rounded-3xl backdrop-blur-glass">
                     <form id="quick-consult-form" class="space-y-6">
                         <div>
-                            <label class="block text-xs uppercase tracking-wider text-champagne mb-3">1. Primary Skin Objective?</label>
+                            <label data-i18n="quiz_q1" class="block text-xs uppercase tracking-wider text-champagne mb-3">1. ¿Cuál es tu objetivo principal?</label>
                             <select class="w-full bg-charcoal/80 border border-white/20 rounded-xl px-4 py-3.5 text-sm text-cream focus:outline-none focus:border-gold">
-                                <option>Natural Lifting & Contour Sculpting</option>
-                                <option>Deep Cleansing & Purifying</option>
-                                <option>Cellular Regeneration & Hydration</option>
-                                <option>Stress Relief & Body Wellness</option>
+                                <option data-i18n="quiz_opt1">Lifting Natural y Esculpido</option>
+                                <option data-i18n="quiz_opt2">Limpieza Profunda y Purificante</option>
+                                <option data-i18n="quiz_opt3">Regeneración Celular e Hidratación</option>
+                                <option data-i18n="quiz_opt4">Alivio del Estrés y Bienestar Corporal</option>
                             </select>
                         </div>
 
                         <div>
-                            <label class="block text-xs uppercase tracking-wider text-champagne mb-3">2. Your Contact Information</label>
+                            <label data-i18n="quiz_q2" class="block text-xs uppercase tracking-wider text-champagne mb-3">2. Tus datos de contacto</label>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <input type="text" placeholder="Your Name" required class="w-full bg-charcoal/80 border border-white/20 rounded-xl px-4 py-3 text-sm text-cream placeholder-cream/40 focus:outline-none focus:border-gold">
-                                <input type="text" placeholder="WhatsApp / Phone or Email" required class="w-full bg-charcoal/80 border border-white/20 rounded-xl px-4 py-3 text-sm text-cream placeholder-cream/40 focus:outline-none focus:border-gold">
+                                <input type="text" data-i18n-ph="quiz_ph_name" placeholder="Tu Nombre" required class="w-full bg-charcoal/80 border border-white/20 rounded-xl px-4 py-3 text-sm text-cream placeholder-cream/40 focus:outline-none focus:border-gold">
+                                <input type="text" data-i18n-ph="quiz_ph_contact" placeholder="WhatsApp / Teléfono o Email" required class="w-full bg-charcoal/80 border border-white/20 rounded-xl px-4 py-3 text-sm text-cream placeholder-cream/40 focus:outline-none focus:border-gold">
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full bg-gold text-charcoal text-xs uppercase tracking-[0.2em] font-bold py-4 rounded-xl hover:bg-champagne transition-all shadow-lg">
-                            Request Custom Skin Proposal
+                        <button type="submit" data-i18n="quiz_btn" class="w-full bg-gold text-charcoal text-xs uppercase tracking-[0.2em] font-bold py-4 rounded-xl hover:bg-champagne transition-all shadow-lg">
+                            Solicitar Propuesta Personalizada
                         </button>
 
-                        <div id="consult-success" class="hidden p-4 rounded-xl bg-emerald/40 border border-emerald text-emerald-100 text-xs text-center font-medium">
-                            ✓ Thank you! Oksana will review your skin goals and reach out directly with your custom recommendation.
+                        <div id="consult-success" data-i18n="quiz_success" class="hidden p-4 rounded-xl bg-emerald/40 border border-emerald text-emerald-100 text-xs text-center font-medium">
+                            ✓ ¡Gracias! Oksana revisará tus objetivos de piel y se pondrá en contacto contigo.
                         </div>
                     </form>
                 </div>
@@ -409,8 +482,8 @@
     <!-- Infinite Testimonial & Review Marquee -->
     <section id="reviews" class="py-24 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 text-center mb-16">
-            <span class="text-xs uppercase tracking-[0.25em] text-bronze font-semibold">Real Experiences</span>
-            <h2 data-i18n="reviews_title" class="font-cormorant text-4xl sm:text-5xl text-charcoal font-normal mt-1">Client Stories</h2>
+            <span data-i18n="reviews_tag" class="text-xs uppercase tracking-[0.25em] text-bronze font-semibold">Experiencias Reales</span>
+            <h2 data-i18n="reviews_title" class="font-cormorant text-4xl sm:text-5xl text-charcoal font-normal mt-1">Lo que dicen mis clientes</h2>
             <div class="w-12 h-0.5 bg-bronze mx-auto mt-3"></div>
         </div>
 
@@ -429,7 +502,7 @@
                 <!-- Testimonial 2 -->
                 <div class="w-80 sm:w-96 p-8 bg-cream border border-linen rounded-3xl flex-shrink-0 whitespace-normal space-y-4 shadow-sm hover:shadow-md transition-shadow">
                     <div class="flex items-center text-gold text-sm gap-1">★★★★★</div>
-                    <p class="text-charcoal/80 text-sm italic font-light">"Оксана, спасибо вам за ваши волшебные руки 🤍 После массажа лицо светится и выглядит намного подтянутее!"</p>
+                    <p class="text-charcoal/80 text-sm italic font-light">"Оксана, спасибо вам за ваши волшебные руки 🤍 A у вас будут места? Брат тоже захотел!"</p>
                     <div class="flex items-center gap-3 pt-2">
                         <div class="w-8 h-8 rounded-full bg-bronze/10 flex items-center justify-center text-xs font-bold text-bronze">EK</div>
                         <span class="text-xs font-medium text-charcoal/60">@elena_k</span>
@@ -463,23 +536,23 @@
     <section id="quick-booking" class="py-24 bg-sand/60">
         <div class="max-w-7xl mx-auto px-6 text-center space-y-12">
             <div class="max-w-2xl mx-auto space-y-4">
-                <span class="text-xs uppercase tracking-[0.25em] text-bronze font-semibold">Direct Booking</span>
+                <span data-i18n="booking_tag" class="text-xs uppercase tracking-[0.25em] text-bronze font-semibold">Reserva Directa</span>
                 <h2 data-i18n="footer_desc" class="font-cormorant text-4xl sm:text-5xl text-charcoal font-normal">
-                    Book Your Appointment Today & Discover Your Best Self
+                    Agenda tu cita hoy y descubre tu mejor versión.
                 </h2>
-                <p class="text-charcoal/70 text-sm font-light">
-                    Direct messaging available via Instagram or WhatsApp for personalized schedule confirmation.
+                <p data-i18n="booking_sub" class="text-charcoal/70 text-sm font-light">
+                    Confirmación de cita directa y personalizada a través de Instagram o WhatsApp.
                 </p>
             </div>
 
             <div class="flex flex-wrap justify-center items-center gap-4">
-                <a href="https://instagram.com/oksana_esteticista" target="_blank" data-i18n="hero_cta"
+                <a href="https://instagram.com/oksana_esteticista" target="_blank" data-i18n="booking_btn_ig"
                    class="bg-charcoal text-champagne px-10 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-medium hover:bg-bronze transition-all shadow-xl hover:-translate-y-0.5">
-                    Message Me on Instagram
+                    Enviar Mensaje en Instagram
                 </a>
-                <a href="https://instagram.com/oksana_esteticista" target="_blank"
+                <a href="https://instagram.com/oksana_esteticista" target="_blank" data-i18n="booking_btn_follow"
                    class="border border-charcoal/30 text-charcoal px-10 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-medium hover:bg-white transition-all">
-                    Follow @oksana_pershyna
+                    Seguir @oksana_pershyna
                 </a>
             </div>
 
@@ -501,16 +574,16 @@
         </div>
     </section>
 
-    <!-- Treatment Detail Modal -->
+    <!-- Treatment Detail Modal (Direct booking UX opens Instagram PM) -->
     <div id="treatment-modal" class="fixed inset-0 z-50 bg-charcoal/70 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full p-8 space-y-6 shadow-2xl relative border border-linen animate-fadeIn">
             <button id="close-modal" class="absolute top-6 right-6 text-charcoal/50 hover:text-charcoal text-xl font-bold">✕</button>
-            <span class="text-[10px] uppercase tracking-widest font-semibold text-bronze px-3 py-1 rounded-full bg-sand">Treatment Details</span>
+            <span id="modal-badge" class="text-[10px] uppercase tracking-widest font-semibold text-bronze px-3 py-1 rounded-full bg-sand">Tratamiento</span>
             <h3 id="modal-title" class="font-cormorant text-3xl text-charcoal font-semibold"></h3>
             <p id="modal-desc" class="text-sm text-charcoal/70 leading-relaxed font-light"></p>
             <div class="pt-4 border-t border-linen flex justify-end">
-                <a href="#quick-booking" class="bg-charcoal text-cream text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:bg-bronze transition-colors">
-                    Reserve Treatment
+                <a id="modal-booking-btn" href="https://instagram.com/oksana_esteticista" target="_blank" data-i18n="modal_reserve_btn" class="bg-charcoal text-champagne text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:bg-bronze transition-colors">
+                    Reservar por Mensaje en Instagram
                 </a>
             </div>
         </div>
@@ -520,11 +593,11 @@
     <footer class="bg-charcoal text-cream/70 py-12 border-t border-white/10 text-xs">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex flex-col items-center sm:items-start">
-                <span class="font-cormorant text-xl text-cream tracking-widest">OKSANA PERSHYNA</span>
-                <span class="text-[9px] uppercase tracking-[0.25em] text-gold/80">Haute Cosmetology & Aesthetics</span>
+                <span data-i18n="hero_headline_name" class="font-cormorant text-xl text-cream tracking-widest">Oksana Pershyna</span>
+                <span data-i18n="hero_headline_subtext" class="text-[9px] uppercase tracking-[0.25em] text-gold/80">Cosmetóloga Esteticista</span>
             </div>
             <div class="text-center sm:text-right text-cream/50">
-                © 2026 Oksana Pershyna. All rights reserved.
+                © 2026 Oksana Pershyna. <span data-i18n="rights_reserved">Todos los derechos reservados.</span>
             </div>
         </div>
     </footer>
